@@ -1,0 +1,3 @@
+﻿  MainWindow.cpp
+d:\qtproject\mycombobox\mainwindow.cpp(26): warning C4100: “event”: 未引用的形参
+  MyComboBox.vcxproj -> D:\qtproject\MyComboBox\debug\MyComboBox.exe
