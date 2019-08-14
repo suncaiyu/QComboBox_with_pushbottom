@@ -28,5 +28,5 @@ private:
     QIcon *m_icon;
     QLabel * m_pAccount_number;
     QPushButton * m_pDelede_button;
-
+    QLabel *pic;
 };

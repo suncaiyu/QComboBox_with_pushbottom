@@ -2,6 +2,7 @@
 #include "ui_MainWindow.h"
 #include "MyComboBox.h"
 #include <QDebug>
+#include <QHBoxLayout>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -18,6 +19,7 @@ MainWindow::MainWindow(QWidget *parent) :
     m_pAddressBox->setItemIcon(i,QIcon(":/Close.jpg"));
     }
 //    m_pAddressBox->setCurrentIndex(0);
+    setCentralWidget(m_pAddressBox);
 }
 
 MainWindow::~MainWindow()
@@ -27,8 +29,8 @@ MainWindow::~MainWindow()
 
 void MainWindow::resizeEvent(QResizeEvent *event)
 {
-    m_pAddressBox->move(10,30);
-    m_pAddressBox->resize(rect().width() - 20,30);
+//    m_pAddressBox->move(10,30);
+//    m_pAddressBox->resize(rect().width() - 20,30);
 }
 
 void MainWindow::lineClicked()

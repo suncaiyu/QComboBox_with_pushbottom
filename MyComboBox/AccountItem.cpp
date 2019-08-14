@@ -6,15 +6,18 @@ AccountItem::AccountItem(QWidget *parent)
 {
     m_Mouse_press = false;
     m_pAccount_number = new QLabel();
+    pic = new QLabel();
 //    m_pAccount_number->setMaximumWidth(300);
     m_pDelede_button = new QPushButton();
 
+    pic->setPixmap(QPixmap(":/Close.jpg"));
     m_pDelede_button->setIcon(QIcon(":/cross.png"));
     m_pDelede_button->setFixedSize(20, 20);
     m_pDelede_button->setStyleSheet("background:transparent;");
     connect(m_pDelede_button, SIGNAL(clicked()), this, SLOT(removeAccount()));
 
     QHBoxLayout *main_layout = new QHBoxLayout();
+    main_layout->addWidget(pic);
     main_layout->addWidget(m_pAccount_number);
     main_layout->addStretch();
     main_layout->addWidget(m_pDelede_button);

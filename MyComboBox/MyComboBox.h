@@ -8,6 +8,7 @@ class MyComboBox : public QComboBox
 public:
     MyComboBox(QWidget *parent = 0);
     ~MyComboBox();
+        QListWidget *m_pListWidget;
 
 public:
     void hidePopup();
@@ -27,6 +28,6 @@ private slots :
     void SlotRemoveAccount(QString);
 
 private:
-    QListWidget *m_pListWidget;
+
 };
 
