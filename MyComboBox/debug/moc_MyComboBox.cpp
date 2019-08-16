@@ -21,8 +21,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_MyComboBox_t {
-    QByteArrayData data[8];
-    char stringdata0[91];
+    QByteArrayData data[9];
+    char stringdata0[97];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -38,12 +38,13 @@ QT_MOC_LITERAL(3, 30, 7), // "account"
 QT_MOC_LITERAL(4, 38, 16), // "SignalRemoveItem"
 QT_MOC_LITERAL(5, 55, 1), // "i"
 QT_MOC_LITERAL(6, 57, 15), // "SlotShowAccount"
-QT_MOC_LITERAL(7, 73, 17) // "SlotRemoveAccount"
+QT_MOC_LITERAL(7, 73, 5), // "index"
+QT_MOC_LITERAL(8, 79, 17) // "SlotRemoveAccount"
 
     },
     "MyComboBox\0SignalShowAccount\0\0account\0"
     "SignalRemoveItem\0i\0SlotShowAccount\0"
-    "SlotRemoveAccount"
+    "index\0SlotRemoveAccount"
 };
 #undef QT_MOC_LITERAL
 
@@ -66,15 +67,15 @@ static const uint qt_meta_data_MyComboBox[] = {
 
  // slots: name, argc, parameters, tag, flags
        6,    1,   40,    2, 0x08 /* Private */,
-       7,    1,   43,    2, 0x08 /* Private */,
+       8,    1,   43,    2, 0x08 /* Private */,
 
  // signals: parameters
     QMetaType::Void, QMetaType::QString,    3,
     QMetaType::Void, QMetaType::Int,    5,
 
  // slots: parameters
-    QMetaType::Void, QMetaType::QString,    2,
-    QMetaType::Void, QMetaType::QString,    2,
+    QMetaType::Void, QMetaType::Int,    7,
+    QMetaType::Void, QMetaType::Int,    7,
 
        0        // eod
 };
@@ -87,8 +88,8 @@ void MyComboBox::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         switch (_id) {
         case 0: _t->SignalShowAccount((*reinterpret_cast< QString(*)>(_a[1]))); break;
         case 1: _t->SignalRemoveItem((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 2: _t->SlotShowAccount((*reinterpret_cast< QString(*)>(_a[1]))); break;
-        case 3: _t->SlotRemoveAccount((*reinterpret_cast< QString(*)>(_a[1]))); break;
+        case 2: _t->SlotShowAccount((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 3: _t->SlotRemoveAccount((*reinterpret_cast< int(*)>(_a[1]))); break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {

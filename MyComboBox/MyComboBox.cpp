@@ -8,9 +8,9 @@
 MyComboBox::MyComboBox(QWidget *parent)
     : QComboBox(parent)
 {
-    m_pListWidget = new QListWidget(this);
-    this->setModel(m_pListWidget->model());
-    this->setView(m_pListWidget);
+    listWidget = new QListWidget(this);
+    this->setModel(listWidget->model());
+    this->setView(listWidget);
 }
 
 MyComboBox::~MyComboBox()
@@ -21,97 +21,98 @@ MyComboBox::~MyComboBox()
 // 解决垂直滚动条出现，多次popup时item错乱的问题  （重要）
 void MyComboBox::hidePopup()
 {
-    m_pListWidget->scrollToTop();
+    listWidget->scrollToTop();
     QComboBox::hidePopup();
 }
 
 void MyComboBox::showPopup()
 {
     QComboBox::showPopup();
-    m_pListWidget->scrollToTop();
+    listWidget->scrollToTop();
 }
 
-void MyComboBox::increaseItem(QString text)
+void MyComboBox::IncreaseItem(QIcon icon, QString text, QVariant userData)
 {
-    AccountItem *account_item = new AccountItem(this);
-    account_item->setAccountNumber(text);
-    connect(account_item, SIGNAL(SignalShowAccount(QString)), this, SLOT(SlotShowAccount(QString)));
-    connect(account_item, SIGNAL(SignalRemoveAccount(QString)), this, SLOT(SlotRemoveAccount(QString)));
-    QListWidgetItem *list_item = new QListWidgetItem(m_pListWidget);
-    m_pListWidget->setItemWidget(list_item, account_item);
+    AccountItem *accountItem = new AccountItem(this);
+    connect(accountItem, SIGNAL(ItemClicked(int)), this, SLOT(SlotShowAccount(int)));
+    connect(accountItem, SIGNAL(SignalRemoveAccount(int)), this, SLOT(SlotRemoveAccount(int)));
+    QListWidgetItem *listItem = new QListWidgetItem(listWidget);
+    listWidget->setItemWidget(listItem, accountItem);
+    int count = GetListWidgetCount() - 1;
+    setItemData(count, userData);
+    setItemIcon(count, icon);
+    setItemText(count, text);
+    RefreshIndex();
+    AdjustItemWidth();
 }
 
-void MyComboBox::removeItem(QString account)
+void MyComboBox::IncreaseItem(QString text, QVariant userData)
 {
-    int list_count = getListWidgetCount();
-    for (int i = 0; i < list_count; i++)
-    {
-        QListWidgetItem *item = m_pListWidget->item(i);
-        AccountItem *account_item = (AccountItem *)(m_pListWidget->itemWidget(item));
-        QString account_number = account_item->getAccountNumber();
-        if (account == account_number)
-        {
-            m_pListWidget->takeItem(i);
-            delete item;
-            emit SignalRemoveItem(i);
-        }
-    }
+
 }
 
-int MyComboBox::getListWidgetCount()
+int MyComboBox::GetListWidgetCount()
 {
-    return m_pListWidget->count();
+    return listWidget->count();
 }
 
-void MyComboBox::SlotShowAccount(QString account)
+void MyComboBox::SlotShowAccount(int index)
 {
-    qDebug()<<account;
-    setEditText(account);
-    lineEdit()->setReadOnly(1);
     hidePopup();
-    emit SignalShowAccount(account.trimmed());
+    setCurrentIndex(index);
 }
 
-void MyComboBox::SlotRemoveAccount(QString account)
+void MyComboBox::SlotRemoveAccount(int index)
 {
     hidePopup();
     QMessageBox::StandardButton rb = QMessageBox::question(NULL, QStringLiteral("删除"), QStringLiteral("确定要删除该地区吗?"), QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes);
     if (rb == QMessageBox::Yes)
     {
-        int list_count = getListWidgetCount();
-        for (int i = 0; i < list_count; i++)
+        int listCount = GetListWidgetCount();
+        for (int i = 0; i < listCount; i++)
         {
-            QListWidgetItem *item = m_pListWidget->item(i);
-            AccountItem *account_item = (AccountItem *)(m_pListWidget->itemWidget(item));
-            QString account_number = account_item->getAccountNumber();
-            if (account == account_number)
-            {
-                m_pListWidget->takeItem(i);
-                delete item;
-                emit SignalRemoveItem(i);
+            QListWidgetItem *item = listWidget->item(i);
+            AccountItem *accountItem = (AccountItem *)(listWidget->itemWidget(item));
+            if (accountItem->GetIndex() == index) {
+                listWidget->takeItem(i);
                 break;
             }
         }
     }
+    RefreshIndex();
 }
 
-bool  MyComboBox::findItem(QString account)
-{
-    int list_count = getListWidgetCount();
-    for (int i = 0; i < list_count; i++)
-    {
-        QListWidgetItem *item = m_pListWidget->item(i);
-        AccountItem *account_item = (AccountItem *)(m_pListWidget->itemWidget(item));
-        QString account_number = account_item->getAccountNumber();
-        if (account == account_number)
-        {
-            return true;
-        }
-    }
-    return false;
-}
 
 void MyComboBox::paintEvent(QPaintEvent *e)
 {
     QComboBox::paintEvent(e);
+}
+
+void MyComboBox::RefreshIndex()
+{
+    for (int i = 0; i < GetListWidgetCount(); i++) {
+        QListWidgetItem *item = listWidget->item(i);
+        AccountItem *accountItem = (AccountItem *)(listWidget->itemWidget(item));
+        accountItem->SetIndex(i);
+    }
+}
+
+void MyComboBox::AdjustItemWidth()
+{
+    int max_len = 0;
+    for (int idx = 0; idx < this->count(); idx++) {
+        if (max_len < this->itemText(idx).length()) {
+            max_len = this->itemText(idx).length();
+        }
+    }
+    int pt_val = this->font().pointSize();//获取字体的磅值
+    int value = max_len * pt_val*0.75 +55;
+    if (this->view()->width() < value) {
+        this->view()->setMinimumWidth(value);
+    }
+}
+
+void MyComboBox::resizeEvent(QResizeEvent *e)
+{
+    AdjustItemWidth();
 }

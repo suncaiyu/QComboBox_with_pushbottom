@@ -21,7 +21,7 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_AccountItem_t {
-    QByteArrayData data[5];
+    QByteArrayData data[6];
     char stringdata0[65];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
@@ -34,12 +34,13 @@ static const qt_meta_stringdata_AccountItem_t qt_meta_stringdata_AccountItem = {
 QT_MOC_LITERAL(0, 0, 11), // "AccountItem"
 QT_MOC_LITERAL(1, 12, 19), // "SignalRemoveAccount"
 QT_MOC_LITERAL(2, 32, 0), // ""
-QT_MOC_LITERAL(3, 33, 17), // "SignalShowAccount"
-QT_MOC_LITERAL(4, 51, 13) // "removeAccount"
+QT_MOC_LITERAL(3, 33, 11), // "ItemClicked"
+QT_MOC_LITERAL(4, 45, 5), // "index"
+QT_MOC_LITERAL(5, 51, 13) // "RemoveAccount"
 
     },
     "AccountItem\0SignalRemoveAccount\0\0"
-    "SignalShowAccount\0removeAccount"
+    "ItemClicked\0index\0RemoveAccount"
 };
 #undef QT_MOC_LITERAL
 
@@ -61,11 +62,11 @@ static const uint qt_meta_data_AccountItem[] = {
        3,    1,   32,    2, 0x06 /* Public */,
 
  // slots: name, argc, parameters, tag, flags
-       4,    0,   35,    2, 0x08 /* Private */,
+       5,    0,   35,    2, 0x08 /* Private */,
 
  // signals: parameters
-    QMetaType::Void, QMetaType::QString,    2,
-    QMetaType::Void, QMetaType::QString,    2,
+    QMetaType::Void, QMetaType::Int,    2,
+    QMetaType::Void, QMetaType::Int,    4,
 
  // slots: parameters
     QMetaType::Void,
@@ -79,23 +80,23 @@ void AccountItem::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id,
         AccountItem *_t = static_cast<AccountItem *>(_o);
         Q_UNUSED(_t)
         switch (_id) {
-        case 0: _t->SignalRemoveAccount((*reinterpret_cast< QString(*)>(_a[1]))); break;
-        case 1: _t->SignalShowAccount((*reinterpret_cast< QString(*)>(_a[1]))); break;
-        case 2: _t->removeAccount(); break;
+        case 0: _t->SignalRemoveAccount((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 1: _t->ItemClicked((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 2: _t->RemoveAccount(); break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {
         int *result = reinterpret_cast<int *>(_a[0]);
         {
-            using _t = void (AccountItem::*)(QString );
+            using _t = void (AccountItem::*)(int );
             if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&AccountItem::SignalRemoveAccount)) {
                 *result = 0;
                 return;
             }
         }
         {
-            using _t = void (AccountItem::*)(QString );
-            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&AccountItem::SignalShowAccount)) {
+            using _t = void (AccountItem::*)(int );
+            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&AccountItem::ItemClicked)) {
                 *result = 1;
                 return;
             }
@@ -144,14 +145,14 @@ int AccountItem::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 }
 
 // SIGNAL 0
-void AccountItem::SignalRemoveAccount(QString _t1)
+void AccountItem::SignalRemoveAccount(int _t1)
 {
     void *_a[] = { nullptr, const_cast<void*>(reinterpret_cast<const void*>(&_t1)) };
     QMetaObject::activate(this, &staticMetaObject, 0, _a);
 }
 
 // SIGNAL 1
-void AccountItem::SignalShowAccount(QString _t1)
+void AccountItem::ItemClicked(int _t1)
 {
     void *_a[] = { nullptr, const_cast<void*>(reinterpret_cast<const void*>(&_t1)) };
     QMetaObject::activate(this, &staticMetaObject, 1, _a);

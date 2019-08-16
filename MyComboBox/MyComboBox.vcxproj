@@ -127,9 +127,8 @@
     </QtRcc>
     <QtUic>
       <QTDIR>D:\QT\QT5.12.0\5.12.0\MSVC2017_64</QTDIR>
-      <InputFile>%(FullPath)</InputFile>
-      <OutputFile>ui_MainWindow.h</OutputFile>
       <ExecutionDescription>Uic'ing %(Identity)...</ExecutionDescription>
+      <InputFile>%(FullPath)</InputFile>
     </QtUic>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -193,19 +192,21 @@
     </QtRcc>
     <QtUic>
       <QTDIR>D:\QT\QT5.12.0\5.12.0\MSVC2017_64</QTDIR>
-      <InputFile>%(FullPath)</InputFile>
-      <OutputFile>ui_MainWindow.h</OutputFile>
       <ExecutionDescription>Uic'ing %(Identity)...</ExecutionDescription>
+      <InputFile>%(FullPath)</InputFile>
     </QtUic>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="AccountItem.cpp" />
+    <ClCompile Include="FFFFF.cpp" />
     <ClCompile Include="MainWindow.cpp" />
     <ClCompile Include="MyComboBox.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="AccountItem.h">
+    </QtMoc>
+    <QtMoc Include="FFFFF.h">
     </QtMoc>
     <QtMoc Include="MainWindow.h">
     </QtMoc>
@@ -229,10 +230,17 @@
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">release\moc_predefs.h;%(Outputs)</Outputs>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </CustomBuild>
+    <ClInclude Include="ui_FFFFF.h" />
     <ClInclude Include="ui_MainWindow.h" />
   </ItemGroup>
   <ItemGroup>
+    <QtUic Include="FFFFF.ui">
+      <OutputFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">ui_FFFFF.h</OutputFile>
+      <OutputFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">ui_FFFFF.h</OutputFile>
+    </QtUic>
     <QtUic Include="MainWindow.ui">
+      <OutputFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">ui_MainWindow.h</OutputFile>
+      <OutputFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">ui_MainWindow.h</OutputFile>
     </QtUic>
   </ItemGroup>
   <ItemGroup>

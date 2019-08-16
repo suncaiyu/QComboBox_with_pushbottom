@@ -15,7 +15,7 @@ MainWindow::MainWindow(QWidget *parent) :
     m_pAddressBox->setMaxVisibleItems(6);
     m_pAddressBox->setStyleSheet("QComboBox QAbstractItemView::item{height:30px;}");
     for (int i = 0; i<5; i++){
-    m_pAddressBox->increaseItem(QString("Account")+QString::number(i,10));  //加入下拉项（str：文本）
+    m_pAddressBox->IncreaseItem(QString("Account")+QString::number(i,10));  //加入下拉项（str：文本）
     m_pAddressBox->setItemIcon(i,QIcon(":/Close.jpg"));
     }
 //    m_pAddressBox->setCurrentIndex(0);

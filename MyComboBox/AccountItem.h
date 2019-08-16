@@ -1,8 +1,10 @@
-﻿#include <QPushButton>
+﻿#pragma once
+#include <QPushButton>
 #include <QWidget>
 #include <QMouseEvent>
 #include <QLabel>
 #include <QIcon>
+#include <QHBoxLayout>
 
 class AccountItem : public QWidget
 {
@@ -10,23 +12,20 @@ class AccountItem : public QWidget
 public:
     AccountItem(QWidget *parent);
     ~AccountItem();
+    int GetIndex();
+    void SetIndex(int index);
 
-public:
-    void setAccountNumber(QString account_text);
-    QString getAccountNumber();
 private:
     void mousePressEvent(QMouseEvent *event);
 signals:
-    void SignalRemoveAccount(QString);
-    void SignalShowAccount(QString);
+    void SignalRemoveAccount(int);
+    void ItemClicked(int index);
 
-    private slots:
-    void removeAccount();
+private slots:
+    void RemoveAccount();
 
 private:
-    bool m_Mouse_press;
-    QIcon *m_icon;
-    QLabel * m_pAccount_number;
-    QPushButton * m_pDelede_button;
-    QLabel *pic;
+    QPushButton * deleteButton;
+    QHBoxLayout *mainLayout;
+    int index;
 };
